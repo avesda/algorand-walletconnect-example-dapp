@@ -76,7 +76,7 @@ const singlePayTxn: Scenario = async (
   const suggestedParams = await apiGetTxnParams(chain);
 
   const oldLastRound = suggestedParams.lastRound;
-  const newLastRound = oldLastRound + 500;
+  const newLastRound = oldLastRound + 1500;
   suggestedParams.lastRound = newLastRound;  
   
   

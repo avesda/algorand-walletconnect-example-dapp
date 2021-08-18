@@ -79,11 +79,11 @@ const singlePayTxn: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100000,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("Here is a very big noteeeeeeeeeeeee")),
     suggestedParams,
   });
 
-  const txnsToSign = [{ txn, message: "This is a transaction message" }];
+  const txnsToSign = [{ txn, message: "This is a transaction message Hello Deniz " }];
   return [txnsToSign];
 };
 

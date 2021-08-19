@@ -75,10 +75,6 @@ const singlePayTxn: Scenario = async (
 ): Promise<ScenarioReturnType> => {
   const suggestedParams = await apiGetTxnParams(chain);
 
-  const oldLastRound = suggestedParams.lastRound;
-  const newLastRound = oldLastRound + 1500;
-  suggestedParams.lastRound = newLastRound;  
-  
   
   const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
     from: address,
@@ -88,7 +84,7 @@ const singlePayTxn: Scenario = async (
     suggestedParams,
   });
 
-  const txnsToSign = [{ txn, message: "This is a transaction message Hello Deniz " }];
+  const txnsToSign = [{ txn, message: "This is a transaction message" }];
   return [txnsToSign];
 };
 
@@ -140,7 +136,7 @@ const singlePayTxnWithRekeyAndClose: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100000,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 1")),
     rekeyTo: testAccounts[2].addr,
     closeRemainderTo: testAccounts[1].addr,
     suggestedParams,
@@ -160,7 +156,7 @@ const singlePayTxnWithInvalidAuthAddress: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100000,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 2")),
     suggestedParams,
   });
 
@@ -182,7 +178,7 @@ const singleAssetOptInTxn: Scenario = async (
     to: address,
     amount: 0,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 3")),
     suggestedParams,
   });
 
@@ -202,7 +198,7 @@ const singleAssetOptInTxnToInvalidAsset: Scenario = async (
     to: address,
     amount: 0,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 4")),
     suggestedParams,
   });
 
@@ -222,7 +218,7 @@ const singleAssetTransferTxn: Scenario = async (
     to: testAccounts[0].addr,
     amount: 1000000,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 5")),
     suggestedParams,
   });
 
@@ -242,7 +238,7 @@ const singleAssetTransferTxnWithClose: Scenario = async (
     to: testAccounts[0].addr,
     amount: 1000000,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 6")),
     closeRemainderTo: testAccounts[1].addr,
     suggestedParams,
   });
@@ -263,7 +259,7 @@ const singleInvalidAssetTransferTxn: Scenario = async (
     to: testAccounts[0].addr,
     amount: 1000000,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 7")),
     suggestedParams,
   });
 
@@ -282,7 +278,7 @@ const singleAppOptIn: Scenario = async (
   const txn = algosdk.makeApplicationOptInTxnFromObject({
     from: address,
     appIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 8")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     suggestedParams,
   });
@@ -302,7 +298,7 @@ const singleAppCall: Scenario = async (
   const txn = algosdk.makeApplicationNoOpTxnFromObject({
     from: address,
     appIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 9")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     suggestedParams,
   });
@@ -322,7 +318,7 @@ const singleAppCallWithRekey: Scenario = async (
   const txn = algosdk.makeApplicationNoOpTxnFromObject({
     from: address,
     appIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 10")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     rekeyTo: testAccounts[2].addr,
     suggestedParams,
@@ -343,7 +339,7 @@ const singleAppCloseOut: Scenario = async (
   const txn = algosdk.makeApplicationCloseOutTxnFromObject({
     from: address,
     appIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 11")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     suggestedParams,
   });
@@ -363,7 +359,7 @@ const singleAppClearState: Scenario = async (
   const txn = algosdk.makeApplicationClearStateTxnFromObject({
     from: address,
     appIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 12")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     suggestedParams,
   });
@@ -391,7 +387,7 @@ const singleAppCreate: Scenario = async (
     numLocalByteSlices: 4,
     extraPages: 1,
     onComplete: algosdk.OnApplicationComplete.NoOpOC,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 13")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     suggestedParams,
   });
@@ -419,7 +415,7 @@ const groupWithAppCreate: Scenario = async (
     numLocalByteSlices: 4,
     extraPages: 1,
     onComplete: algosdk.OnApplicationComplete.NoOpOC,
-    note: new Uint8Array(Buffer.from("note value for app create")),
+    note: new Uint8Array(Buffer.from("TXN 14")),
     appArgs: [Uint8Array.from([0]), Uint8Array.from([0, 1])],
     suggestedParams,
   });
@@ -452,7 +448,7 @@ const sign1FromGroupTxn: Scenario = async (
     to: address,
     amount: 0,
     assetIndex: optInAssetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 15")),
     suggestedParams,
   });
 
@@ -485,7 +481,7 @@ const sign2FromGroupTxn: Scenario = async (
     to: address,
     amount: 0,
     assetIndex: optInAssetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 16")),
     suggestedParams,
   });
 
@@ -529,7 +525,7 @@ const signGroupWithPayOptinTransfer: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 500000,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 17")),
     suggestedParams,
   });
 
@@ -568,7 +564,7 @@ const signGroupWithPayRekey: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 500000,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 18")),
     suggestedParams,
   });
 
@@ -601,7 +597,7 @@ const signTxnWithAssetClose: Scenario = async (
     to: testAccounts[0].addr,
     amount: 50,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 19")),
     suggestedParams,
   });
 
@@ -634,7 +630,7 @@ const signTxnWithRekey: Scenario = async (
     to: testAccounts[0].addr,
     amount: 50,
     assetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 20")),
     suggestedParams,
   });
 
@@ -668,7 +664,7 @@ const signTxnWithRekeyAndAssetClose: Scenario = async (
     to: testAccounts[0].addr,
     assetIndex,
     amount: 10,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 21")),
     suggestedParams,
   });
 
@@ -729,7 +725,7 @@ const signGroupOf7: Scenario = async (
     to: address,
     amount: 0,
     assetIndex: optInAssetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 22")),
     suggestedParams,
   });
 
@@ -819,7 +815,7 @@ const fullTxnGroup: Scenario = async (
       to: address,
       amount: 0,
       assetIndex,
-      note: new Uint8Array(Buffer.from("example note value")),
+      note: new Uint8Array(Buffer.from("TXN 23")),
       suggestedParams,
     });
 
@@ -852,7 +848,7 @@ const multipleNonAtomicTxns: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 24 txn 1")),
     suggestedParams,
   });
 
@@ -894,7 +890,7 @@ const multipleNonAtomicTxnsForOnlyAssets: Scenario = async (
     to: address,
     amount: 0,
     assetIndex: optInAssetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 25")),
     suggestedParams,
   });
 
@@ -937,7 +933,7 @@ const multipleNonAtomicTxnsMixed: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 26 txn 1")),
     suggestedParams,
   });
 
@@ -978,7 +974,7 @@ const atomicGroupAndNonAtomicTxnsForOnlyPayment: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 27 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1031,7 +1027,7 @@ const atomicGroupAndNonAtomicTxnsMixed: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 28 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1081,7 +1077,7 @@ const multipleAtomicGroupsForOnlyPayment: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 29 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1131,7 +1127,7 @@ const multipleAtomicGroupsForOnlyAssets: Scenario = async (
     to: address,
     amount: 0,
     assetIndex: optInAssetIndex,
-    note: new Uint8Array(Buffer.from("example note value")),
+    note: new Uint8Array(Buffer.from("TXN 30")),
     suggestedParams,
   });
 
@@ -1182,7 +1178,7 @@ const multipleAtomicGroupsWithInvalidAsset: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 31 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1231,7 +1227,7 @@ const multipleAtomicGroupsMixed1: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 32 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1282,7 +1278,7 @@ const multipleAtomicGroupsMixed2: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 33 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1331,7 +1327,7 @@ const multipleAtomicGroupSignOnly2: Scenario = async (
     from: testAccounts[0].addr,
     to: address,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 34 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1378,7 +1374,7 @@ const atomicGroupAndNonAtomicTxnsSignOnly2: Scenario = async (
     from: testAccounts[0].addr,
     to: address,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("atomic group 1 txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 35 atomic group 1 txn 1")),
     suggestedParams,
   });
 
@@ -1416,7 +1412,7 @@ const atomicNoSignTxn: Scenario = async (
     from: testAccounts[0].addr,
     to: address,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 36 txn 1")),
     suggestedParams,
   });
 
@@ -1456,7 +1452,7 @@ const atomicAndSingleNoSignTxn: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100001,
-    note: new Uint8Array(Buffer.from("txn 1")),
+    note: new Uint8Array(Buffer.from("TXN 37 txn 1")),
     suggestedParams,
   });
 

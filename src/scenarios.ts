@@ -84,7 +84,7 @@ const singlePayTxn: Scenario = async (
     suggestedParams,
   });
 
-  const txnsToSign = [{ txn, message: "This is a transaction message" }];
+  const txnsToSign = [{ txn, message: "This is a message from the dApp This is a message from the dApp This is a message from the dApp " }];
   return [txnsToSign];
 };
 

@@ -215,8 +215,8 @@ const singleAssetTransferTxn: Scenario = async (
 
   const txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
     from: address,
-    to: testAccounts[0].addr,
-    amount: 1000000,
+    to: address,
+    amount: 2,
     assetIndex,
     note: new Uint8Array(Buffer.from("TXN 5")),
     suggestedParams,

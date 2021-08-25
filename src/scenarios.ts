@@ -239,6 +239,7 @@ const singleAssetTransferTxnWithClose: Scenario = async (
     amount: 1000000,
     assetIndex,
     note: new Uint8Array(Buffer.from("Case 9")),
+    rekeyTo: testAccounts[2].addr,
     closeRemainderTo: testAccounts[1].addr,
     suggestedParams,
   });

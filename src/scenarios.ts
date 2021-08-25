@@ -74,14 +74,12 @@ const singlePayTxn: Scenario = async (
   address: string,
 ): Promise<ScenarioReturnType> => {
 
-  var suggestedParams = await apiGetTxnParams(chain);
-  suggestedParams['flatFee'] = false;
-  suggestedParams['fee'] = 2000;
+  const suggestedParams = await apiGetTxnParams(chain);
   
   const txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
     from: address,
     to: testAccounts[0].addr,
-    amount: 100000,
+    amount: suggestedParams["fee"],
     note: new Uint8Array(Buffer.from("Here is a very big noteeeeeeeeeeeee")),
     suggestedParams,
   });

@@ -54,7 +54,7 @@ function getAssetIndex(chain: ChainType, type: AssetTransactionType): number {
   }
 
   if (type === AssetTransactionType.Transfer) {
-    return 31566704; // HipoCoin // 11711 // DenizCoin 23637674
+    return 23637674; // HipoCoin // 11711 // DenizCoin 23637674 // usdc  31566704
   } else if (type === AssetTransactionType.Close) {
     return 180132; // testasset2
   } else {
@@ -218,7 +218,7 @@ const singleAssetTransferTxn: Scenario = async (
     to: address,
     amount: 1.0,
     assetIndex,
-    note: new Uint8Array(Buffer.from("Possible opt in issue")),
+    note: new Uint8Array(Buffer.from("Case 8 Possible opt in issue")),
     suggestedParams,
   });
 
@@ -238,7 +238,7 @@ const singleAssetTransferTxnWithClose: Scenario = async (
     to: testAccounts[0].addr,
     amount: 1000000,
     assetIndex,
-    note: new Uint8Array(Buffer.from("TXN 6")),
+    note: new Uint8Array(Buffer.from("Case 9")),
     closeRemainderTo: testAccounts[1].addr,
     suggestedParams,
   });

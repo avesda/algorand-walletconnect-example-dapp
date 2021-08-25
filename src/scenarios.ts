@@ -80,6 +80,7 @@ const singlePayTxn: Scenario = async (
     from: address,
     to: testAccounts[0].addr,
     amount: 100000,
+    fee: 0.2,
     note: new Uint8Array(Buffer.from("Here is a very big noteeeeeeeeeeeee")),
     suggestedParams,
   });

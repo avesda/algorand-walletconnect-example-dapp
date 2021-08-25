@@ -54,7 +54,7 @@ function getAssetIndex(chain: ChainType, type: AssetTransactionType): number {
   }
 
   if (type === AssetTransactionType.Transfer) {
-    return 11711; // HipoCoin
+    return 23637674; // HipoCoin // 11711 // DenizCoin
   } else if (type === AssetTransactionType.Close) {
     return 180132; // testasset2
   } else {
@@ -216,9 +216,9 @@ const singleAssetTransferTxn: Scenario = async (
   const txn = algosdk.makeAssetTransferTxnWithSuggestedParamsFromObject({
     from: address,
     to: address,
-    amount: 2,
+    amount: 1.0,
     assetIndex,
-    note: new Uint8Array(Buffer.from("TXN 5")),
+    note: new Uint8Array(Buffer.from("Possible opt in issue")),
     suggestedParams,
   });
 

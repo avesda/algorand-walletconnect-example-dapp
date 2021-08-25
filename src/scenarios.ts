@@ -54,7 +54,7 @@ function getAssetIndex(chain: ChainType, type: AssetTransactionType): number {
   }
 
   if (type === AssetTransactionType.Transfer) {
-    return 23637674; // HipoCoin // 11711 // DenizCoin
+    return 31566704; // HipoCoin // 11711 // DenizCoin 23637674
   } else if (type === AssetTransactionType.Close) {
     return 180132; // testasset2
   } else {

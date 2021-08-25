@@ -81,7 +81,7 @@ const singlePayTxn: Scenario = async (
     to: testAccounts[0].addr,
     amount: 100000,
     note: new Uint8Array(Buffer.from("Here is a very big noteeeeeeeeeeeee")),
-    suggestedParams,
+   
   });
 
   const txnsToSign = [{ txn, message: "This is a message from the dApp This is a message from the dApp This is a message from the dApp " }];
